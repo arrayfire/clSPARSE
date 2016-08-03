@@ -219,12 +219,13 @@ if( BUILD_clSPARSE OR BUILD_SAMPLES )
     -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
   )
 
+  ExternalProject_Get_Property( clSPARSE install_dir )
+
   # Our goal with samples is to demonstrate two things
   # 1.  Demonstrate what simple clSPARSE code looks like to set up and execute common functionality
   # 2.  Demonstrate how an external program would find and link clSPARSE
   if ( BUILD_SAMPLES )
     message( STATUS "Setting up sample programs ...")
-    ExternalProject_Get_Property( clSPARSE install_dir )
 
     ExternalProject_Add(
       clSPARSE-samples
@@ -238,4 +239,12 @@ if( BUILD_clSPARSE OR BUILD_SAMPLES )
       INSTALL_COMMAND ""
     )
   endif( )
+
+  # INSTALL
+  INSTALL(DIRECTORY "${install_dir}/include/"
+          DESTINATION "include"
+          COMPONENT HEADERS)
+  INSTALL(DIRECTORY "${install_dir}/lib64/"
+          DESTINATION "lib64"
+          COMPONENT LIBRARIES)
 endif( )
