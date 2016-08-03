@@ -173,37 +173,51 @@ if( BUILD_clSPARSE OR BUILD_SAMPLES )
   include( ExternalProject )
 
   # Main project
-  if( BUILD_clSPARSE )
-    message( STATUS "Setting up clSPARSE external..." )
+  #if( BUILD_clSPARSE )
+  #  message( STATUS "Setting up clSPARSE external..." )
 
-    if ( BUILD_SAMPLES )
-      # If the user elects to build samples, then we must build and install clSPARSE
-      # The install location is set as a subdirectory of the SuperBuild
-      ExternalProject_Add(
-        clSPARSE
-        DEPENDS ${clSPARSE.Dependencies}
-        SOURCE_DIR ${PROJECT_SOURCE_DIR}/src
-        BINARY_DIR clSPARSE-build
-        INSTALL_DIR clSPARSE-package
-        CMAKE_ARGS ${clSPARSE.Cmake.Args} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -DBUILD_CLVERSION=${BUILD_CLVERSION} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
-        -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
-      )
-    else( )
-      # If the user does not want to build samples, then build clSPARSE but don't automatically
-      # install it
-      ExternalProject_Add(
-        clSPARSE
-        DEPENDS ${clSPARSE.Dependencies}
-        SOURCE_DIR ${PROJECT_SOURCE_DIR}/src
-        BINARY_DIR clSPARSE-build
-        CMAKE_ARGS ${clSPARSE.Cmake.Args} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-        -DBUILD_CLVERSION=${BUILD_CLVERSION} -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
-        INSTALL_COMMAND ""
-      )
-    endif( )
+  #  if ( BUILD_SAMPLES )
+  #    # If the user elects to build samples, then we must build and install clSPARSE
+  #    # The install location is set as a subdirectory of the SuperBuild
+  #    ExternalProject_Add(
+  #      clSPARSE
+  #      DEPENDS ${clSPARSE.Dependencies}
+  #      SOURCE_DIR ${PROJECT_SOURCE_DIR}/src
+  #      BINARY_DIR clSPARSE-build
+  #      INSTALL_DIR clSPARSE-package
+  #      CMAKE_ARGS ${clSPARSE.Cmake.Args} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+  #      -DBUILD_CLVERSION=${BUILD_CLVERSION} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+  #      -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
+  #    )
+  #  else( )
+  #    # If the user does not want to build samples, then build clSPARSE but don't automatically
+  #    # install it
+  #    ExternalProject_Add(
+  #      clSPARSE
+  #      DEPENDS ${clSPARSE.Dependencies}
+  #      SOURCE_DIR ${PROJECT_SOURCE_DIR}/src
+  #      BINARY_DIR clSPARSE-build
+  #      CMAKE_ARGS ${clSPARSE.Cmake.Args} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+  #      -DBUILD_CLVERSION=${BUILD_CLVERSION} -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
+  #      INSTALL_COMMAND ""
+  #    )
+  #  endif( )
+  #
+  #endif( )
 
-  endif( )
+  message( STATUS "Setting up clSPARSE external..." )
+
+  # The install location is set as a subdirectory of the SuperBuild
+  ExternalProject_Add(
+    clSPARSE
+    DEPENDS ${clSPARSE.Dependencies}
+    SOURCE_DIR ${PROJECT_SOURCE_DIR}/src
+    BINARY_DIR clSPARSE-build
+    INSTALL_DIR clSPARSE-package
+    CMAKE_ARGS ${clSPARSE.Cmake.Args} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DBUILD_CLVERSION=${BUILD_CLVERSION} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+    -DUSE_SYSTEM_CL2HPP:BOOL=${USE_SYSTEM_CL2HPP}
+  )
 
   # Our goal with samples is to demonstrate two things
   # 1.  Demonstrate what simple clSPARSE code looks like to set up and execute common functionality
