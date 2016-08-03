@@ -275,8 +275,10 @@ endif(NOT USE_SYSTEM_CL2HPP)
 # PRIVATE linking prevents transitive library linking of dependent libraries
 target_link_libraries( clSPARSE PRIVATE ${OPENCL_LIBRARIES} ${CMAKE_DL_LIBS} ) #${clBLAS_LIBRARIES} )
 
+SET(LIBRARY_DEBUG_POSTFIX "d" CACHE STRING "Library Debug Postfix")
+
 set_target_properties( clSPARSE PROPERTIES VERSION ${clSPARSE_VERSION} SOVERSION ${clSPARSE_SOVERSION} )
-set_target_properties( clSPARSE PROPERTIES DEBUG_POSTFIX d )
+set_target_properties( clSPARSE PROPERTIES DEBUG_POSTFIX "${LIBRARY_DEBUG_POSTFIX}" )
 set_target_properties( clSPARSE PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/staging" )
 set_target_properties( clSPARSE PROPERTIES CXX_VISIBILITY_PRESET hidden)
 set_target_properties( clSPARSE PROPERTIES VISIBILITY_INLINES_HIDDEN ON)
