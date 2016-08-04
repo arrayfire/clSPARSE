@@ -285,9 +285,9 @@ set_target_properties( clSPARSE PROPERTIES VISIBILITY_INLINES_HIDDEN ON)
 target_compile_definitions( clSPARSE PUBLIC CLSPARSE_INDEX_SIZEOF=${clSPARSE_INDEX_SIZEOF} )
 
 # Following Boost conventions of prefixing 'lib' on static built libraries, across all platforms
-if( ${clSPARSE_LIBRARY_TYPE} STREQUAL "STATIC" )
-  set_target_properties( clSPARSE PROPERTIES PREFIX "lib" ) # global CMAKE_STATIC_LIBRARY_PREFIX
-endif( )
+#if( ${clSPARSE_LIBRARY_TYPE} STREQUAL "STATIC" )
+#  set_target_properties( clSPARSE PROPERTIES PREFIX "lib" ) # global CMAKE_STATIC_LIBRARY_PREFIX
+#endif( )
 
 # I think this would all be a bit easier if clBLAS started exporting its targets
 # similar to what clsparse is doing
